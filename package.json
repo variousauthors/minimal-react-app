@@ -1,0 +1,102 @@
+{
+  "name": "some-app",
+  "version": "0.18.2",
+  "description": "Some App",
+  "repository": "https://github.com/variousauthors/minimal-react-app.git",
+  "author": "various authors",
+  "license": "UNLICENSED",
+  "scripts": {
+    "precommit": "yarn hardlint",
+    "test": "yarn softlint && jest",
+    "test:common": "yarn test src/common",
+    "test:reporting": "yarn test src/apps/Reporting",
+    "test:sandbox": "yarn test src/apps/SandboxApp",
+    "test:ci": "yarn hardlint && jest --ci --coverage --maxWorkers 2",
+    "softlint": "tslint --project tsconfig.json --force",
+    "hardlint": "tslint --project tsconfig.json",
+    "build": "webpack -p",
+    "watch": "webpack --watch --progress --verbose",
+    "coverage": "jest --coverage",
+    "start": "webpack-dev-server",
+    "preversion": "(echo ${CONVENTIONAL_GITHUB_RELEASER_TOKEN:?'Please set export CONVENTIONAL_GITHUB_RELEASER_TOKEN.'} >> /dev/null && which conventional-github-releaser) || exit 1",
+    "postversion": "git push --no-verify --follow-tags && sleep 2 && conventional-github-releaser",
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "dependencies": {
+    "@types/es6-shim": "^0.31.34",
+    "@types/ramda": "^0.25.6",
+    "@types/react": "^16.0.9",
+    "awesome-typescript-loader": "^3.1.3",
+    "babel-preset-es2015": "~6.18.0",
+    "babel-preset-stage-2": "~6.18.0",
+    "dotenv-webpack": "^1.5.4",
+    "es6-shim": "^0.35.3",
+    "ramda": "^0.25.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "source-map-loader": "^0.2.1",
+    "typescript": "^2.7.x",
+    "webpack": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.1.3",
+    "@types/jest": "^21.1.1",
+    "@types/react-dom": "^16.0.5",
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "jest": "^21.1.0",
+    "styled-components": "^3.2.6",
+    "ts-jest": "^21.0.1",
+    "tslint": "^5.8.0",
+    "webpack-auto-inject-version": "^1.0.0",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/__tests__/testSetup.tsx"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/__tests__/testSetup.tsx",
+    "mapCoverage": true,
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "index.tsx"
+    ],
+    "testMatch": [
+      "**/__tests__/src/**/*.ts?(x)",
+      "**/?(*.)(spec|test).ts?(x)"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 55,
+        "functions": 40
+      }
+    }
+  },
+  "optionalDependencies": {
+    "conventional-github-releaser": "^2.0.0"
+  },
+  "files": [
+    "dist/"
+  ]
+}

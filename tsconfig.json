@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": false,
+    "lib": ["es6", "es2017", "dom", "esnext.asynciterable"],
+    "typeRoots": [
+      "@types",
+      "./@types"
+    ]
+  },
+  "include": [
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "./src/**/*.test.tsx",
+    "./src/**/*.example.tsx",
+  ]
+}
